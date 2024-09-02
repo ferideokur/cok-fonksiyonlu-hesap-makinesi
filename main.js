@@ -262,22 +262,179 @@ function showCalculator(type) {
 }
 
 // Fonksiyon tanımlamaları (20 adet)
-function handleBmiCalculation(event) { /*...*/ }
-function handleAgeCalculation(event) { /*...*/ }
-function handleInterestCalculation(event) { /*...*/ }
-function handlePercentageCalculation(event) { /*...*/ }
-function handleCurrencyConversion(event) { /*...*/ }
-function handleAreaCalculation(event) { /*...*/ }
-function handleVolumeCalculation(event) { /*...*/ }
-function handleBinaryConversion(event) { /*...*/ }
-function handleTriangleAreaCalculation(event) { /*...*/ }
-function handleSquareRootCalculation(event) { /*...*/ }
-function handleFactorialCalculation(event) { /*...*/ }
-function handleCompoundInterestCalculation(event) { /*...*/ }
-function handleLoanCalculation(event) { /*...*/ }
-function handleRectangleAreaCalculation(event) { /*...*/ }
-function handleCircleAreaCalculation(event) { /*...*/ }
-function handleCylinderVolumeCalculation(event) { /*...*/ }
-function handleTrianglePerimeterCalculation(event) { /*...*/ }
-function handleFahrenheitToCelsiusConversion(event) { /*...*/ }
-function handleCelsiusToFahrenheitConversion(event) { /*...*/ }
+
+// BMI Hesaplama Fonksiyonu
+function handleBmiCalculation(event) {
+    event.preventDefault();
+    const weight = parseFloat(document.getElementById('weight').value);
+    const height = parseFloat(document.getElementById('height').value) / 100; // cm'den m'ye çevir
+    const bmi = (weight / (height * height)).toFixed(2);
+    document.getElementById('bmiResult').textContent = `BMI: ${bmi}`;
+}
+
+// Yaş Hesaplama Fonksiyonu
+function handleAgeCalculation(event) {
+    event.preventDefault();
+    const birthYear = parseInt(document.getElementById('birthYear').value);
+    const currentYear = new Date().getFullYear();
+    const age = currentYear - birthYear;
+    document.getElementById('ageResult').textContent = `Yaş: ${age}`;
+}
+
+// Faiz Hesaplama Fonksiyonu
+function handleInterestCalculation(event) {
+    event.preventDefault();
+    const principal = parseFloat(document.getElementById('principal').value);
+    const rate = parseFloat(document.getElementById('rate').value);
+    const time = parseFloat(document.getElementById('time').value);
+    const interest = (principal * rate * time / 100).toFixed(2);
+    document.getElementById('interestResult').textContent = `Faiz: ${interest}`;
+}
+
+// Yüzde Hesaplama Fonksiyonu
+function handlePercentageCalculation(event) {
+    event.preventDefault();
+    const total = parseFloat(document.getElementById('total').value);
+    const value = parseFloat(document.getElementById('value').value);
+    const percentage = ((value / total) * 100).toFixed(2);
+    document.getElementById('percentageResult').textContent = `Yüzde: ${percentage}%`;
+}
+
+// Döviz Dönüştürme Fonksiyonu
+function handleCurrencyConversion(event) {
+    event.preventDefault();
+    const amount = parseFloat(document.getElementById('amount').value);
+    const rate = 8.5; // Örnek bir döviz kuru
+    const converted = (amount * rate).toFixed(2);
+    document.getElementById('currencyResult').textContent = `Dönüştürülen Tutar: ${converted} TL`;
+}
+
+// Alan Hesaplama Fonksiyonu
+function handleAreaCalculation(event) {
+    event.preventDefault();
+    const length = parseFloat(document.getElementById('length').value);
+    const width = parseFloat(document.getElementById('width').value);
+    const area = (length * width).toFixed(2);
+    document.getElementById('areaResult').textContent = `Alan: ${area} cm²`;
+}
+
+// Hacim Hesaplama Fonksiyonu
+function handleVolumeCalculation(event) {
+    event.preventDefault();
+    const length = parseFloat(document.getElementById('length').value);
+    const width = parseFloat(document.getElementById('width').value);
+    const height = parseFloat(document.getElementById('height').value);
+    const volume = (length * width * height).toFixed(2);
+    document.getElementById('volumeResult').textContent = `Hacim: ${volume} cm³`;
+}
+
+// İkili Sayı Dönüştürme Fonksiyonu
+function handleBinaryConversion(event) {
+    event.preventDefault();
+    const decimal = parseInt(document.getElementById('decimal').value);
+    const binary = decimal.toString(2);
+    document.getElementById('binaryResult').textContent = `İkili Karşılık: ${binary}`;
+}
+
+// Üçgen Alanı Hesaplama Fonksiyonu
+function handleTriangleAreaCalculation(event) {
+    event.preventDefault();
+    const base = parseFloat(document.getElementById('base').value);
+    const height = parseFloat(document.getElementById('height').value);
+    const area = (0.5 * base * height).toFixed(2);
+    document.getElementById('triangleResult').textContent = `Üçgen Alanı: ${area} cm²`;
+}
+
+// Karekök Hesaplama Fonksiyonu
+function handleSquareRootCalculation(event) {
+    event.preventDefault();
+    const number = parseFloat(document.getElementById('number').value);
+    const sqrt = Math.sqrt(number).toFixed(2);
+    document.getElementById('sqrtResult').textContent = `Karekök: ${sqrt}`;
+}
+
+// Faktöriyel Hesaplama Fonksiyonu
+function handleFactorialCalculation(event) {
+    event.preventDefault();
+    const number = parseInt(document.getElementById('number').value);
+    let factorial = 1;
+    for (let i = 1; i <= number; i++) {
+        factorial *= i;
+    }
+    document.getElementById('factorialResult').textContent = `Faktöriyel: ${factorial}`;
+}
+
+// Bileşik Faiz Hesaplama Fonksiyonu
+function handleCompoundInterestCalculation(event) {
+    event.preventDefault();
+    const principal = parseFloat(document.getElementById('principal').value);
+    const rate = parseFloat(document.getElementById('rate').value) / 100;
+    const time = parseFloat(document.getElementById('time').value);
+    const compounds = parseFloat(document.getElementById('compounds').value);
+    const amount = principal * Math.pow((1 + rate / compounds), compounds * time);
+    const compoundInterest = (amount - principal).toFixed(2);
+    document.getElementById('compoundInterestResult').textContent = `Bileşik Faiz: ${compoundInterest} TL`;
+}
+
+// Kredi Hesaplama Fonksiyonu
+function handleLoanCalculation(event) {
+    event.preventDefault();
+    const amount = parseFloat(document.getElementById('amount').value);
+    const rate = parseFloat(document.getElementById('rate').value) / 100 / 12;
+    const years = parseInt(document.getElementById('years').value);
+    const months = years * 12;
+    const monthlyPayment = (amount * rate) / (1 - Math.pow((1 + rate), -months));
+    document.getElementById('loanResult').textContent = `Aylık Ödeme: ${monthlyPayment.toFixed(2)} TL`;
+}
+
+// Dikdörtgen Alanı Hesaplama Fonksiyonu
+function handleRectangleAreaCalculation(event) {
+    event.preventDefault();
+    const length = parseFloat(document.getElementById('length').value);
+    const width = parseFloat(document.getElementById('width').value);
+    const area = (length * width).toFixed(2);
+    document.getElementById('rectangleAreaResult').textContent = `Dikdörtgen Alanı: ${area} cm²`;
+}
+
+// Daire Alanı Hesaplama Fonksiyonu
+function handleCircleAreaCalculation(event) {
+    event.preventDefault();
+    const radius = parseFloat(document.getElementById('radius').value);
+    const area = (Math.PI * radius * radius).toFixed(2);
+    document.getElementById('circleAreaResult').textContent = `Daire Alanı: ${area} cm²`;
+}
+
+// Silindir Hacmi Hesaplama Fonksiyonu
+function handleCylinderVolumeCalculation(event) {
+    event.preventDefault();
+    const radius = parseFloat(document.getElementById('radius').value);
+    const height = parseFloat(document.getElementById('height').value);
+    const volume = (Math.PI * radius * radius * height).toFixed(2);
+    document.getElementById('cylinderVolumeResult').textContent = `Silindir Hacmi: ${volume} cm³`;
+}
+
+// Üçgen Çevresi Hesaplama Fonksiyonu
+function handleTrianglePerimeterCalculation(event) {
+    event.preventDefault();
+    const side1 = parseFloat(document.getElementById('side1').value);
+    const side2 = parseFloat(document.getElementById('side2').value);
+    const side3 = parseFloat(document.getElementById('side3').value);
+    const perimeter = (side1 + side2 + side3).toFixed(2);
+    document.getElementById('trianglePerimeterResult').textContent = `Üçgen Çevresi: ${perimeter} cm`;
+}
+
+// Fahrenheit'tan Celsius'a Dönüşüm Fonksiyonu
+function handleFahrenheitToCelsiusConversion(event) {
+    event.preventDefault();
+    const fahrenheit = parseFloat(document.getElementById('fahrenheit').value);
+    const celsius = ((fahrenheit - 32) * 5 / 9).toFixed(2);
+    document.getElementById('fahrenheitToCelsiusResult').textContent = `Celsius: ${celsius}°C`;
+}
+
+// Celsius'tan Fahrenheit'a Dönüşüm Fonksiyonu
+function handleCelsiusToFahrenheitConversion(event) {
+    event.preventDefault();
+    const celsius = parseFloat(document.getElementById('celsius').value);
+    const fahrenheit = ((celsius * 9 / 5) + 32).toFixed(2);
+    document.getElementById('celsiusToFahrenheitResult').textContent = `Fahrenheit: ${fahrenheit}°F`;
+}
